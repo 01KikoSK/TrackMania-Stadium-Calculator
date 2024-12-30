@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackMania² Stadium Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; }
+        .calculator { max-width: 600px; margin: 50px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px 20px; background-color: #28a745; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        #result { margin-top: 20px; padding: 10px; background-color: #e9ecef; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>TrackMania² Stadium Calculator</h1>
+        <form id="calculatorForm">
+            <div class="form-group">
+                <label for="lapTime">Lap Time (seconds):</label>
+                <input type="number" id="lapTime" name="lapTime" required>
+            </div>
+            <div class="form-group">
+                <label for="numLaps">Number of Laps:</label>
+                <input type="number" id="numLaps" name="numLaps" required>
+            </div>
+            <div class="form-group">
+                <label for="avgSpeed">Average Speed (km/h):</label>
+                <input type="number" id="avgSpeed" name="avgSpeed" required>
+            </div>
+            <button type="button" onclick="calculate()">Calculate</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script>
+        function calculate() {
+            const lapTime = document.getElementById('lapTime').value;
+            const numLaps = document.getElementById('numLaps').value;
+            const avgSpeed = document.getElementById('avgSpeed').value;
+            
+            if(lapTime && numLaps && avgSpeed) {
+                const totalTime = lapTime * numLaps;
+                const totalDistance = (avgSpeed * (totalTime / 3600));
+                
+                document.getElementById('result').innerHTML = `
+                    <h2>Result:</h2>
+                    <p>Total Time: ${totalTime.toFixed(2)} seconds</p>
+                    <p>Total Distance: ${totalDistance.toFixed(2)} km</p>
+                `;
+            } else {
+                document.getElementById('result').innerHTML = `
+                    <p style="color:red;">Please fill in all fields.</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
